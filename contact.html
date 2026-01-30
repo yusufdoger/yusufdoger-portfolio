@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yusuf Döğer ile iletişime geçin. Eğitim teknolojileri projeleri için ulaşın.">
+    <title>İletişim — Yusuf Döğer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Contact Page Specific Styles */
+        .page-hero {
+            min-height: 50vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .page-hero h1 {
+            color: var(--white);
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+            max-width: 600px;
+        }
+
+        .contact-page {
+            padding: var(--space-4xl) 0;
+            background: var(--gray-50);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: var(--space-3xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-info-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .contact-info-card>p {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .contact-detail-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: all var(--transition-base);
+        }
+
+        .contact-detail-item:hover .contact-detail-icon {
+            background: var(--gradient-2);
+        }
+
+        .contact-detail-text h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .contact-detail-text p {
+            font-size: 0.9375rem;
+        }
+
+        .contact-detail-text a {
+            color: var(--primary);
+            transition: color var(--transition-fast);
+        }
+
+        .contact-detail-text a:hover {
+            color: var(--accent);
+        }
+
+        .contact-social {
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .contact-social h4 {
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-link-btn {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            transition: all var(--transition-base);
+        }
+
+        .social-link-btn:hover {
+            background: var(--gradient-2);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .contact-form-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-form-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-xl);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .form-group-light {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group-light label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-group-light input,
+        .form-group-light textarea,
+        .form-group-light select {
+            width: 100%;
+            padding: var(--space-md);
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--gray-800);
+            transition: all var(--transition-fast);
+        }
+
+        .form-group-light input:focus,
+        .form-group-light textarea:focus,
+        .form-group-light select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-group-light input::placeholder,
+        .form-group-light textarea::placeholder {
+            color: var(--gray-400);
+        }
+
+        .form-group-light textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: var(--space-md) var(--space-xl);
+            background: var(--gradient-2);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg), 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl), 0 0 50px rgba(0, 212, 255, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Map Placeholder */
+        .map-section {
+            padding: var(--space-4xl) 0 0;
+            background: var(--gray-50);
+        }
+
+        .map-placeholder {
+            height: 400px;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="index.html" class="nav-logo">Yusuf Döğer</a>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolyo</a></li>
+                <li><a href="contact.html" class="nav-link active">İletişim</a></li>
+            </ul>
+
+            <button class="nav-toggle" aria-label="Menüyü aç/kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>İletişim</h1>
+            <p>Projeleriniz veya iş birliği teklifleri için benimle iletişime geçebilirsiniz.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-container">
+
+                <!-- Contact Info -->
+                <div class="contact-info-card fade-in">
+                    <h2>İletişim Bilgileri</h2>
+                    <p>Eğitim teknolojileri projeleriniz için benimle iletişime geçmekten çekinmeyin. En kısa sürede
+                        size dönüş yapacağım.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">📧</div>
+                            <div class="contact-detail-text">
+                                <h4>E-posta</h4>
+                                <p><a href="mailto:info@yusufdoger.com">info@yusufdoger.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">📱</div>
+                            <div class="contact-detail-text">
+                                <h4>Telefon</h4>
+                                <p><a href="tel:+905551234567">+90 555 123 45 67</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">📍</div>
+                            <div class="contact-detail-text">
+                                <h4>Konum</h4>
+                                <p>İstanbul, Türkiye</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon">⏰</div>
+                            <div class="contact-detail-text">
+                                <h4>Çalışma Saatleri</h4>
+                                <p>Pazartesi - Cuma: 09:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-social">
+                        <h4>Sosyal Medya</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link-btn" aria-label="LinkedIn">in</a>
+                            <a href="#" class="social-link-btn" aria-label="Twitter">𝕏</a>
+                            <a href="#" class="social-link-btn" aria-label="GitHub">⌨</a>
+                            <a href="#" class="social-link-btn" aria-label="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-card slide-in-right">
+                    <h2>Mesaj Gönderin</h2>
+
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group-light">
+                                <label for="name">Adınız Soyadınız *</label>
+                                <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
+                            </div>
+
+                            <div class="form-group-light">
+                                <label for="email">E-posta Adresiniz *</label>
+                                <input type="email" id="email" name="email" placeholder="ornek@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group-light">
+                                <label for="phone">Telefon Numaranız</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+90 5XX XXX XX XX">
+                            </div>
+
+                            <div class="form-group-light">
+                                <label for="subject">Konu *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Konu seçin</option>
+                                    <option value="project">Proje Teklifi</option>
+                                    <option value="consultation">Danışmanlık</option>
+                                    <option value="collaboration">İş Birliği</option>
+                                    <option value="other">Diğer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-light">
+                            <label for="message">Mesajınız *</label>
+                            <textarea id="message" name="message"
+                                placeholder="Projeniz veya talebiniz hakkında detay verin..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Mesaj Gönder</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-placeholder">
+            <span>🗺️ Harita - İstanbul, Türkiye</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Yusuf Döğer</div>
+
+                <div class="footer-links">
+                    <a href="about.html">Hakkımda</a>
+                    <a href="portfolio.html">Portfolyo</a>
+                    <a href="contact.html">İletişim</a>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-link" aria-label="GitHub">⌨</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yusuf Döğer. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

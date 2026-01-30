@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yusuf Döğer hakkında detaylı bilgi. Eğitim, iş deneyimi ve yetkinlikler.">
+    <title>Hakkımda — Yusuf Döğer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* About Page Specific Styles */
+        .page-hero {
+            min-height: 50vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .page-hero h1 {
+            color: var(--white);
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+            max-width: 600px;
+        }
+
+        .cv-section {
+            padding: var(--space-4xl) 0;
+            background: var(--white);
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--space-3xl);
+        }
+
+        .cv-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .cv-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: var(--radius-xl);
+            object-fit: cover;
+            margin-bottom: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cv-contact-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .cv-contact-card h4 {
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+        }
+
+        .cv-contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            color: var(--gray-600);
+            font-size: 0.9375rem;
+        }
+
+        .cv-main h2 {
+            font-size: 1.75rem;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .cv-section-block {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: var(--space-2xl);
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: var(--space-2xl);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * var(--space-2xl) - 5px);
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-xs);
+        }
+
+        .timeline-company {
+            font-size: 0.9375rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+
+        .timeline-description {
+            color: var(--gray-600);
+            font-size: 0.9375rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .skill-tag {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--gray-100);
+            color: var(--primary);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all var(--transition-base);
+        }
+
+        .skill-tag:hover {
+            background: var(--gradient-2);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .download-cv {
+            margin-top: var(--space-2xl);
+        }
+
+        @media (max-width: 992px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-sidebar {
+                position: static;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .cv-photo {
+                max-width: 250px;
+            }
+
+            .cv-contact-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="index.html" class="nav-logo">Yusuf Döğer</a>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link active">Hakkımda</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolyo</a></li>
+                <li><a href="contact.html" class="nav-link">İletişim</a></li>
+            </ul>
+
+            <button class="nav-toggle" aria-label="Menüyü aç/kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Hakkımda</h1>
+            <p>Eğitim teknolojileri alanında tutkulu bir uzman olarak, dijital öğrenme deneyimlerini tasarlıyor ve
+                geliştiriyorum.</p>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section class="cv-section">
+        <div class="container">
+            <div class="cv-grid">
+
+                <!-- Sidebar -->
+                <aside class="cv-sidebar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                        alt="Yusuf Döğer" class="cv-photo">
+
+                    <div class="cv-contact-card">
+                        <h4>İletişim Bilgileri</h4>
+                        <div class="cv-contact-item">
+                            <span>📧</span>
+                            <span>info@yusufdoger.com</span>
+                        </div>
+                        <div class="cv-contact-item">
+                            <span>📍</span>
+                            <span>İstanbul, Türkiye</span>
+                        </div>
+                        <div class="cv-contact-item">
+                            <span>💼</span>
+                            <span>linkedin.com/in/yusufdoger</span>
+                        </div>
+                        <div class="cv-contact-item">
+                            <span>🌐</span>
+                            <span>yusufdoger.com</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="cv-main">
+
+                    <!-- Summary -->
+                    <div class="cv-section-block fade-in">
+                        <h2>Profesyonel Özet</h2>
+                        <p>
+                            Eğitim teknolojileri alanında 10+ yıllık deneyime sahip bir uzmanım.
+                            E-öğrenme içerikleri, SCORM modülleri ve etkileşimli dijital öğrenme deneyimleri
+                            tasarlama konusunda uzmanlaştım. Modern web teknolojilerini kullanarak öğrenmeyi
+                            daha etkili ve eğlenceli hale getirmek için çalışıyorum.
+                        </p>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="cv-section-block fade-in">
+                        <h2>İş Deneyimi</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2020 - Günümüz</div>
+                                <div class="timeline-title">Eğitim Teknolojileri Uzmanı</div>
+                                <div class="timeline-company">Örnek Şirket A.Ş.</div>
+                                <p class="timeline-description">
+                                    E-öğrenme içerikleri tasarlama, SCORM modülleri geliştirme,
+                                    LMS yönetimi ve eğitim programları koordinasyonu.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date">2017 - 2020</div>
+                                <div class="timeline-title">Eğitim İçerik Geliştirici</div>
+                                <div class="timeline-company">Eğitim Teknolojileri Ltd.</div>
+                                <p class="timeline-description">
+                                    Etkileşimli eğitim içerikleri tasarlama, video prodüksiyon
+                                    ve multimedya materyal geliştirme.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date">2015 - 2017</div>
+                                <div class="timeline-title">Öğretim Tasarımcısı</div>
+                                <div class="timeline-company">Akademi Eğitim</div>
+                                <p class="timeline-description">
+                                    Müfredat geliştirme, öğretim materyalleri hazırlama
+                                    ve eğitmen eğitimi programları.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="cv-section-block fade-in">
+                        <h2>Eğitim</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2013 - 2015</div>
+                                <div class="timeline-title">Yüksek Lisans - Eğitim Teknolojileri</div>
+                                <div class="timeline-company">Örnek Üniversitesi</div>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-date">2009 - 2013</div>
+                                <div class="timeline-title">Lisans - Bilgisayar ve Öğretim Teknolojileri Eğitimi</div>
+                                <div class="timeline-company">Örnek Üniversitesi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="cv-section-block fade-in">
+                        <h2>Yetkinlikler</h2>
+                        <div class="skills-list">
+                            <span class="skill-tag">E-Öğrenme</span>
+                            <span class="skill-tag">SCORM</span>
+                            <span class="skill-tag">Articulate Storyline</span>
+                            <span class="skill-tag">Adobe Captivate</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">LMS Yönetimi</span>
+                            <span class="skill-tag">Video Prodüksiyon</span>
+                            <span class="skill-tag">Grafik Tasarım</span>
+                            <span class="skill-tag">Öğretim Tasarımı</span>
+                            <span class="skill-tag">Oyunlaştırma</span>
+                            <span class="skill-tag">UX/UI Tasarım</span>
+                            <span class="skill-tag">Proje Yönetimi</span>
+                        </div>
+                    </div>
+
+                    <!-- Download CV Button -->
+                    <div class="download-cv">
+                        <a href="#" class="btn btn-primary">📄 CV'yi İndir (PDF)</a>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Yusuf Döğer</div>
+
+                <div class="footer-links">
+                    <a href="about.html">Hakkımda</a>
+                    <a href="portfolio.html">Portfolyo</a>
+                    <a href="contact.html">İletişim</a>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-link" aria-label="GitHub">⌨</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yusuf Döğer. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

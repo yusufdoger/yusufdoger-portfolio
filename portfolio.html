@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yusuf Döğer'in eğitim teknolojileri projeleri ve portfolyosu.">
+    <title>Portfolyo — Yusuf Döğer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Portfolio Page Specific Styles */
+        .page-hero {
+            min-height: 50vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .page-hero h1 {
+            color: var(--white);
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+            max-width: 600px;
+        }
+
+        .portfolio-page {
+            padding: var(--space-4xl) 0;
+            background: var(--gray-50);
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-3xl);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-full);
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-2);
+            border-color: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .portfolio-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .portfolio-item {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+        }
+
+        .portfolio-item-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+        }
+
+        .portfolio-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .portfolio-item:hover .portfolio-item-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 31, 51, 0.95) 0%, rgba(15, 31, 51, 0.5) 50%, transparent 100%);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-xl);
+            transition: opacity var(--transition-base);
+        }
+
+        .portfolio-item:hover .portfolio-item-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item-overlay h3 {
+            color: var(--white);
+            font-size: 1.25rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .portfolio-item-overlay p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .portfolio-item-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .portfolio-item-actions .btn {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.875rem;
+        }
+
+        .portfolio-item-content {
+            padding: var(--space-lg);
+        }
+
+        .portfolio-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+        }
+
+        .portfolio-item-tag {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--gray-100);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+        }
+
+        .portfolio-item-content h4 {
+            margin-bottom: var(--space-sm);
+            transition: color var(--transition-fast);
+        }
+
+        .portfolio-item:hover .portfolio-item-content h4 {
+            color: var(--primary-light);
+        }
+
+        .portfolio-item-content p {
+            font-size: 0.9375rem;
+        }
+
+        /* Featured Project */
+        .portfolio-item.featured {
+            grid-column: span 2;
+        }
+
+        .portfolio-item.featured .portfolio-item-image {
+            aspect-ratio: 21/9;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-masonry {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-item.featured {
+                grid-column: span 1;
+            }
+
+            .portfolio-item.featured .portfolio-item-image {
+                aspect-ratio: 16/10;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="index.html" class="nav-logo">Yusuf Döğer</a>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                <li><a href="portfolio.html" class="nav-link active">Portfolyo</a></li>
+                <li><a href="contact.html" class="nav-link">İletişim</a></li>
+            </ul>
+
+            <button class="nav-toggle" aria-label="Menüyü aç/kapat">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Portfolyo</h1>
+            <p>Eğitim teknolojileri alanında geliştirdiğim projeler ve etkileşimli içerikler.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-page">
+        <div class="container">
+
+            <!-- Filters -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="e-learning">E-Öğrenme</button>
+                <button class="filter-btn" data-filter="scorm">SCORM</button>
+                <button class="filter-btn" data-filter="gamification">Oyunlaştırma</button>
+                <button class="filter-btn" data-filter="web">Web Geliştirme</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-masonry">
+
+                <!-- Featured Project -->
+                <div class="portfolio-item featured fade-in" data-category="e-learning">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=600&fit=crop"
+                            alt="Kurumsal Eğitim Platformu">
+                        <div class="portfolio-item-overlay">
+                            <h3>Kurumsal Eğitim Platformu</h3>
+                            <p>500+ çalışan için özelleştirilmiş interaktif eğitim modülleri.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                                <a href="#" class="btn btn-secondary">Canlı Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">E-Öğrenme</span>
+                            <span class="portfolio-item-tag">SCORM</span>
+                            <span class="portfolio-item-tag">LMS</span>
+                        </div>
+                        <h4>Kurumsal Eğitim Platformu</h4>
+                        <p>Büyük ölçekli bir kurum için tasarlanmış, çoklu dil destekli eğitim sistemi.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item fade-in" data-category="gamification">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop"
+                            alt="Oyunlaştırılmış Öğrenme">
+                        <div class="portfolio-item-overlay">
+                            <h3>Oyunlaştırılmış Öğrenme</h3>
+                            <p>Puan ve rozet sistemleri ile motivasyonu artıran platform.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">Oyunlaştırma</span>
+                            <span class="portfolio-item-tag">JavaScript</span>
+                        </div>
+                        <h4>Oyunlaştırılmış Öğrenme Sistemi</h4>
+                        <p>Liderlik tablosu, başarılar ve ödül mekanizmaları içeren eğitim modülü.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item fade-in" data-category="scorm">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
+                            alt="SCORM İçerik Paketi">
+                        <div class="portfolio-item-overlay">
+                            <h3>SCORM İçerik Paketi</h3>
+                            <p>Tüm LMS platformlarıyla uyumlu eğitim içeriği.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">SCORM 1.2</span>
+                            <span class="portfolio-item-tag">xAPI</span>
+                        </div>
+                        <h4>SCORM İçerik Paketi</h4>
+                        <p>Standartlara uygun, izlenebilir ve raporlanabilir eğitim modülleri.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item fade-in" data-category="web">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
+                            alt="Eğitim Yönetim Paneli">
+                        <div class="portfolio-item-overlay">
+                            <h3>Eğitim Yönetim Paneli</h3>
+                            <p>Eğitmenler için özelleştirilmiş yönetim arayüzü.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">Web Geliştirme</span>
+                            <span class="portfolio-item-tag">React</span>
+                        </div>
+                        <h4>Eğitim Yönetim Paneli</h4>
+                        <p>İçerik yönetimi, kullanıcı takibi ve raporlama araçları.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-item fade-in" data-category="e-learning">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
+                            alt="Çocuklar için Eğitim">
+                        <div class="portfolio-item-overlay">
+                            <h3>Çocuklar İçin Eğitim</h3>
+                            <p>İlkokul öğrencileri için interaktif öğrenme modülleri.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">E-Öğrenme</span>
+                            <span class="portfolio-item-tag">Animasyon</span>
+                        </div>
+                        <h4>Çocuklar İçin Eğitim Modülü</h4>
+                        <p>Oyun tabanlı, eğlenceli ve eğitici içerik serisi.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-item fade-in" data-category="gamification">
+                    <div class="portfolio-item-image">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop"
+                            alt="Quiz Uygulaması">
+                        <div class="portfolio-item-overlay">
+                            <h3>Etkileşimli Quiz Uygulaması</h3>
+                            <p>Anlık geri bildirimli değerlendirme sistemi.</p>
+                            <div class="portfolio-item-actions">
+                                <a href="#" class="btn btn-primary">Detayları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-content">
+                        <div class="portfolio-item-tags">
+                            <span class="portfolio-item-tag">Oyunlaştırma</span>
+                            <span class="portfolio-item-tag">Quiz</span>
+                        </div>
+                        <h4>Etkileşimli Quiz Uygulaması</h4>
+                        <p>Çoktan seçmeli, eşleştirme ve sürükle-bırak sorularıyla değerlendirme.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Yusuf Döğer</div>
+
+                <div class="footer-links">
+                    <a href="about.html">Hakkımda</a>
+                    <a href="portfolio.html">Portfolyo</a>
+                    <a href="contact.html">İletişim</a>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                    <a href="#" class="social-link" aria-label="GitHub">⌨</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yusuf Döğer. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Portfolio Filtering
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
