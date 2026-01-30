@@ -17,14 +17,15 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.yusufdoger.com
+          server: yusufdoger.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           port: 21
           local-dir: ./
           server-dir: /public_html/
-          timeout: 60000
+          timeout: 120000
+          security: loose
           exclude: |
             **/.git*
             **/.git*/**
